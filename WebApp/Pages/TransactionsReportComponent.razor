@@ -1,0 +1,104 @@
+﻿@page "/transaction"
+@attribute [Authorize(Policy = "AdminOnly")]
+
+@inject IJSRuntime JSRuntime
+@inject UseCases.UseCaseInterfaces.IGetTransactionsUseCase GetTransactionsUseCase
+
+<div class="row">
+    <div class="col-2">
+        <label for="cashier">Nombre del Cajero(a)</label>
+        <input type="text" id="cashier" class="form-control" @bind-value="cashierName" />
+    </div>
+    <div class="col-3">
+        <label for="startdate">Fecha de Inicio</label>
+        <input type="date" id="startdate" class="form-control" @bind-value="startDate" />
+    </div>
+    <div class="col-3">
+        <label for="enddate">Fecha de Fin</label>
+        <input type="date" id="enddate" class="form-control" @bind-value="endDate" />
+    </div>
+    <div class="col-2">
+        <label>&nbsp;</label>
+        <button type="button" class="btn btn-primary form-control" @onclick="LoadTransactions">Buscar</button>
+    </div>
+    <div class="col-2">
+        <label>&nbsp;</label>
+        <button type="button" class="btn btn-primary form-control" @onclick="PrintReport">Imprimir</button>
+    </div>
+</div>
+<br />
+
+@if (transactions != null)
+{
+    <div id="printarea">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fecha y Hora</th>
+                    <th>Nombre del Cajero(a)</th>
+                    <th>Nombre del Producto</th>
+                    <th>Cantidad Antes</th>
+                    <th>Cantidad Vendida</th>
+                    <th>Cantidad Después</th>
+                    <th>Precio</th>
+                    <th>Vendido AMT</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tran in transactions)
+                {
+                    <tr>
+                        <td>@tran.TimeStamp.ToString("yyyy-MM-dd hh:mm")</td>
+                        <td>@tran.CashierName</td>
+                        <td>@tran.ProductName</td>
+                        <td>@tran.BeforeQuantity</td>
+                        <td>@tran.SoldQuantity</td>
+                        <td>@(tran.BeforeQuantity - tran.SoldQuantity)</td>
+                        <td style="text-align:right">@(string.Format("{0:c}", tran.Price))</td>
+                        <td style="text-align:right">@(string.Format("{0:c}", tran.SoldQuantity * tran.Price))</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">&nbsp;</td>
+                    <td style="text-align:right">
+                        <b>Gran Total:</b>
+                    </td>
+                    <td style="text-align:right">
+                        <b>
+                            @(string.Format("{0:c}", transactions.Sum(x => x.Price * x.SoldQuantity)))
+                        </b>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+}
+
+@code {
+
+    private string cashierName;
+    private DateTime startDate;
+    private DateTime endDate;
+    private IEnumerable<Transaction> transactions;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        startDate = DateTime.Today;
+        endDate = DateTime.Today;
+    }
+
+    private void LoadTransactions()
+    {
+        transactions = GetTransactionsUseCase.Execute(cashierName, startDate, endDate);
+
+    }
+
+    private void PrintReport()
+    {
+        JSRuntime.InvokeVoidAsync("print");
+    }
+}

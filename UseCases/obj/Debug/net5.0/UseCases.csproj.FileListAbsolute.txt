@@ -1,0 +1,15 @@
+D:\Programacion\SupermarketManagement\UseCases\bin\Debug\net5.0\UseCases.deps.json
+D:\Programacion\SupermarketManagement\UseCases\bin\Debug\net5.0\UseCases.dll
+D:\Programacion\SupermarketManagement\UseCases\bin\Debug\net5.0\ref\UseCases.dll
+D:\Programacion\SupermarketManagement\UseCases\bin\Debug\net5.0\UseCases.pdb
+D:\Programacion\SupermarketManagement\UseCases\bin\Debug\net5.0\CoreBusiness.dll
+D:\Programacion\SupermarketManagement\UseCases\bin\Debug\net5.0\CoreBusiness.pdb
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\UseCases.csproj.AssemblyReference.cache
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\UseCases.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\UseCases.AssemblyInfoInputs.cache
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\UseCases.AssemblyInfo.cs
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\UseCases.csproj.CoreCompileInputs.cache
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\UseCases.csproj.CopyComplete
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\UseCases.dll
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\ref\UseCases.dll
+D:\Programacion\SupermarketManagement\UseCases\obj\Debug\net5.0\UseCases.pdb

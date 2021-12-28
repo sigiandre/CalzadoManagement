@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager Navigation
+
+<AuthorizeView>
+    <Authorized>
+        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Manage">Hola, @context.User.Identity.Name!</a>
+        <form class="py-2 d-none d-md-inline-block" action="/Identity/Account/Logout?returnUrl=%2F" method="post">
+            <button type="submit" class="nav-link btn btn-link">Logout</button>
+        </form>
+    </Authorized>
+    <NotAuthorized>
+        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Register">Registrar</a>
+        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Login">Login</a>
+    </NotAuthorized>
+</AuthorizeView>

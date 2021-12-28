@@ -1,0 +1,17 @@
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\bin\Debug\net5.0\Plugins.DataStore.InMemory.deps.json
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\bin\Debug\net5.0\Plugins.DataStore.InMemory.dll
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\bin\Debug\net5.0\ref\Plugins.DataStore.InMemory.dll
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\bin\Debug\net5.0\Plugins.DataStore.InMemory.pdb
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\bin\Debug\net5.0\CoreBusiness.dll
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\bin\Debug\net5.0\UseCases.dll
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\bin\Debug\net5.0\UseCases.pdb
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\bin\Debug\net5.0\CoreBusiness.pdb
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\Plugins.DataStore.InMemory.csproj.AssemblyReference.cache
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\Plugins.DataStore.InMemory.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\Plugins.DataStore.InMemory.AssemblyInfoInputs.cache
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\Plugins.DataStore.InMemory.AssemblyInfo.cs
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\Plugins.DataStore.InMemory.csproj.CoreCompileInputs.cache
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\Plugins.DataStore.InMemory.csproj.CopyComplete
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\Plugins.DataStore.InMemory.dll
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\ref\Plugins.DataStore.InMemory.dll
+D:\Programacion\SupermarketManagement\Plugins.DataStore.InMemory\obj\Debug\net5.0\Plugins.DataStore.InMemory.pdb

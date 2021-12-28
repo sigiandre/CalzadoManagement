@@ -1,0 +1,76 @@
+﻿@page "/products"
+@attribute [Authorize(Policy = "AdminOnly")]
+
+@inject NavigationManager NavigationManager
+@inject UseCases.UseCaseInterfaces.IViewProductsUseCase ViewProductsUseCase
+@inject UseCases.UseCaseInterfaces.IGetCategoryByIdUseCase GetCategoryByIdUseCase
+@inject UseCases.UseCaseInterfaces.IDeleteProductUseCase DeleteProductUseCase
+
+<h3>Administrar Productos</h3>
+
+<br />
+
+@if (products != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Categoria de Producto</th>
+                <th>Nombre del Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@GetCategoryByIdUseCase.Execute(product.CategoryId.Value)?.Name</td>
+                    <td>@product.Name</td>
+                    <td>@product.Quantity</td>
+                    <td>@(Math.Round(product.Price.Value, 2))</td>
+                    <td>
+                        <button type="button" class="btn btn-link" @onclick="@(() => EditProduct(product))">Editar</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-link" @onclick="@(() => DeleteProduct(product.ProductId))">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br />
+<button type="button" @onclick="OnClickAddProduct" class="btn btn-primary">Añadir Producto</button>
+
+@code {
+
+    private IEnumerable<Product> products;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LoadProducts();
+    }
+
+    private void OnClickAddProduct()
+    {
+        NavigationManager.NavigateTo("/addproduct");
+    }
+
+    private void EditProduct(Product product)
+    {
+        NavigationManager.NavigateTo($"/editproduct/{product.ProductId}");
+    }
+
+    private void DeleteProduct(int productId)
+    {
+        DeleteProductUseCase.Delete(productId);
+        LoadProducts();
+    }
+
+    private void LoadProducts()
+    {
+        products = ViewProductsUseCase.Execute();
+    }
+}

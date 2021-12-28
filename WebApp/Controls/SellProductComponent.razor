@@ -1,0 +1,93 @@
+﻿@inject UseCases.UseCaseInterfaces.IGetProductByIdUseCase GetProductByIdUseCase
+@inject UseCases.UseCaseInterfaces.ISellProductUseCase SellProductUseCase
+
+@if (productToSell != null)
+{
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    <EditForm Model="productToSell" OnValidSubmit="SellProduct">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Nombre de Producto</label>
+            <input class="form-control" id="name" type="text" readonly value="@productToSell.Name" />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Precio</label>
+            <input class="form-control" id="price" type="text" readonly value="@(string.Format("{0:c}", productToSell.Price))" />
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Cantidad</label>
+            <InputNumber id="quantity" @bind-Value="@productToSell.Quantity" class="form-control"></InputNumber>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Vender</button>
+    </EditForm>
+}
+
+@code {
+
+    private Product productToSell;
+    private string errorMessage;
+
+    [Parameter]
+    public string CashierName { get; set; }
+
+    [Parameter]
+    public Product SelectedProduct { get; set; }
+
+    [Parameter]
+    public EventCallback<Product> OnProductSold { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (SelectedProduct != null)
+        {
+            productToSell = new Product
+            {
+                ProductId = SelectedProduct.ProductId,
+                Name = SelectedProduct.Name,
+                CategoryId = SelectedProduct.CategoryId,
+                Price = SelectedProduct.Price,
+                Quantity = 0
+
+            };
+        }
+        else
+        {
+            productToSell = null;
+        }
+    }
+
+    private void SellProduct()
+    {
+        if (string.IsNullOrWhiteSpace(CashierName))
+        {
+            errorMessage = "Falta el nombre del cajero(a).";
+            return;
+        }
+
+        var product = GetProductByIdUseCase.Execute(productToSell.ProductId);
+        if (productToSell.Quantity <= 0)
+        {
+            errorMessage = "La cantidad debe ser mayor que cero.";
+        }
+        else if (product.Quantity >= productToSell.Quantity)
+        {
+            OnProductSold.InvokeAsync(productToSell);
+            errorMessage = string.Empty;
+            SellProductUseCase.Execute(CashierName, productToSell.ProductId, productToSell.Quantity.Value);
+        }
+        else
+        {
+            errorMessage = $"{product.Name} solo tiene {product.Quantity} en stock. No es suficiente.";
+        }
+    }
+}
